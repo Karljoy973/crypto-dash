@@ -1,0 +1,165 @@
+import { expect, test, describe } from 'vitest'
+
+import { coinSort, coinSorter } from './coinSort'
+
+
+const coins = [
+    {
+        "id": "bitcoin",
+        "symbol": "btc",
+        "name": "Bitcoin",
+        "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+        "current_price": 117696,
+        "market_cap": 2341492347404,
+        "market_cap_rank": 1,
+        "fully_diluted_valuation": 2341492347404,
+        "total_volume": 42422585003,
+        "high_24h": 119026,
+        "low_24h": 117157,
+        "price_change_24h": -389.4591374241718,
+        "price_change_percentage_24h": -0.32981,
+        "market_cap_change_24h": -8295110036.350098,
+        "market_cap_change_percentage_24h": -0.35302,
+        "circulating_supply": 19899125,
+        "total_supply": 19899125,
+        "max_supply": 21000000,
+        "ath": 122838,
+        "ath_change_percentage": -4.3707,
+        "ath_date": "2025-07-14T07:56:01.937Z",
+        "atl": 67.81,
+        "atl_change_percentage": 173135.26219,
+        "atl_date": "2013-07-06T00:00:00.000Z",
+        "roi": null,
+        "last_updated": "2025-07-29T22:36:02.003Z"
+    },
+    {
+        "id": "ethereum",
+        "symbol": "eth",
+        "name": "Ethereum",
+        "image": "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+        "current_price": 3779.51,
+        "market_cap": 456192172515,
+        "market_cap_rank": 2,
+        "fully_diluted_valuation": 456192172515,
+        "total_volume": 34447843419,
+        "high_24h": 3877.35,
+        "low_24h": 3730.12,
+        "price_change_24h": -8.679269566036965,
+        "price_change_percentage_24h": -0.22911,
+        "market_cap_change_24h": -1397632588.9525757,
+        "market_cap_change_percentage_24h": -0.30543,
+        "circulating_supply": 120710810.3687492,
+        "total_supply": 120710810.3687492,
+        "max_supply": null,
+        "ath": 4878.26,
+        "ath_change_percentage": -22.74969,
+        "ath_date": "2021-11-10T14:24:19.604Z",
+        "atl": 0.432979,
+        "atl_change_percentage": 870259.21015,
+        "atl_date": "2015-10-20T00:00:00.000Z",
+        "roi": {
+            "times": 41.92901655658235,
+            "currency": "btc",
+            "percentage": 4192.901655658235
+        },
+        "last_updated": "2025-07-29T22:36:03.561Z"
+    },
+    {
+        "id": "ripple",
+        "symbol": "xrp",
+        "name": "XRP",
+        "image": "https://coin-images.coingecko.com/coins/images/44/large/xrp-symbol-white-128.png?1696501442",
+        "current_price": 3.12,
+        "market_cap": 184776019284,
+        "market_cap_rank": 3,
+        "fully_diluted_valuation": 311868789389,
+        "total_volume": 6320584638,
+        "high_24h": 3.18,
+        "low_24h": 3.06,
+        "price_change_24h": -0.016734561561229544,
+        "price_change_percentage_24h": -0.53367,
+        "market_cap_change_24h": -1065384856.9969788,
+        "market_cap_change_percentage_24h": -0.57328,
+        "circulating_supply": 59239646627,
+        "total_supply": 99985901574,
+        "max_supply": 100000000000,
+        "ath": 3.65,
+        "ath_change_percentage": -14.7116,
+        "ath_date": "2025-07-18T03:40:53.808Z",
+        "atl": 0.00268621,
+        "atl_change_percentage": 115674.32205,
+        "atl_date": "2014-05-22T00:00:00.000Z",
+        "roi": null,
+        "last_updated": "2025-07-29T22:36:08.167Z"
+    },
+    {
+        "id": "tether",
+        "symbol": "usdt",
+        "name": "Tether",
+        "image": "https://coin-images.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+        "current_price": 0.999786,
+        "market_cap": 163620216786,
+        "market_cap_rank": 4,
+        "fully_diluted_valuation": 163620216786,
+        "total_volume": 92437704934,
+        "high_24h": 1,
+        "low_24h": 0.999655,
+        "price_change_24h": -0.000121375491438536,
+        "price_change_percentage_24h": -0.01214,
+        "market_cap_change_24h": 40494662,
+        "market_cap_change_percentage_24h": 0.02476,
+        "circulating_supply": 163657602091.9723,
+        "total_supply": 163657602091.9723,
+        "max_supply": null,
+        "ath": 1.32,
+        "ath_change_percentage": -24.43818,
+        "ath_date": "2018-07-24T00:00:00.000Z",
+        "atl": 0.572521,
+        "atl_change_percentage": 74.62328,
+        "atl_date": "2015-03-02T00:00:00.000Z",
+        "roi": null,
+        "last_updated": "2025-07-29T22:36:11.958Z"
+    },
+    {
+        "id": "binancecoin",
+        "symbol": "bnb",
+        "name": "BNB",
+        "image": "https://coin-images.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+        "current_price": 802.78,
+        "market_cap": 111795715495,
+        "market_cap_rank": 5,
+        "fully_diluted_valuation": 111795715495,
+        "total_volume": 2156621225,
+        "high_24h": 834.02,
+        "low_24h": 801.22,
+        "price_change_24h": -23.992469794703652,
+        "price_change_percentage_24h": -2.90195,
+        "market_cap_change_24h": -3469898684.639282,
+        "market_cap_change_percentage_24h": -3.01035,
+        "circulating_supply": 139288493.34,
+        "total_supply": 139288493.34,
+        "max_supply": 200000000,
+        "ath": 858.34,
+        "ath_change_percentage": -6.56791,
+        "ath_date": "2025-07-28T09:36:43.658Z",
+        "atl": 0.0398177,
+        "atl_change_percentage": 2013986.64437,
+        "atl_date": "2017-10-19T00:00:00.000Z",
+        "roi": null,
+        "last_updated": "2025-07-29T22:36:01.819Z"
+    }
+]
+
+describe('checks the behavior of coinSort in various contexts to understand what is going on', () => {
+    test("Sorting 2 coins with id asc", () => {
+        console.log("coin Sorter result", coinSorter(coins[0], coins[1], "id_asc"))
+        console.log("Expected Result" , coins[0].id.toLowerCase().localeCompare(coins[1].id.toLowerCase()))
+        expect(coinSorter(coins[0], coins[1], "id_asc")).toBe(coins[0].id.toLowerCase().localeCompare(coins[1].id.toLowerCase()))
+    })
+    
+    test("sorting the coins array with id asc ", () => {
+        const sorted = coinSort(coins, "id_asc")
+        console.log(sorted)
+        expect(sorted[0].id).toBe("binancecoin")
+    })
+})
