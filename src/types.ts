@@ -16,7 +16,7 @@ export type CoinGeckoData = {
   market_cap_change_percentage_24h: number;
   circulating_supply: number;
   total_supply: number;
-  max_supply: number|null;
+  max_supply: number | null;
   ath: number;
   ath_change_percentage: number;
   ath_date: string; // ISO date string
@@ -31,18 +31,16 @@ export type CoinGeckoData = {
   last_updated: string; // ISO date string
 };
 
-// I wish I could use this to generate an array so I can map over the array and do stuff 
-  export type GeckoOrder =
-    | "market_cap_desc"
-    | "market_cap_asc"
-    | "volume_asc"
-    | "volume_desc"
-    | "id_asc"
-    | "id_desc"
-    |"current_price_asc"|"current_price_desc"
-    
-    ;
-
+// I wish I could use this to generate an array so I can map over the array and do stuff
+export type GeckoOrder =
+  | "market_cap_desc"
+  | "market_cap_asc"
+  | "volume_asc"
+  | "volume_desc"
+  | "id_asc"
+  | "id_desc"
+  | "current_price_asc"
+  | "current_price_desc";
 
 export type coinProps = {
   coin: CoinGeckoData;
@@ -54,7 +52,6 @@ export type FilterInputProps = {
 };
 
 export type SortByInputProps = {
-    sortBy: GeckoOrder; 
-    onSortByChange: Function
-}
- 
+  sortBy: GeckoOrder;
+  onSortByChange: Function;
+};
