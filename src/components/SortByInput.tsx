@@ -29,4 +29,5 @@ const SortByInput = ({ sortBy, onSortByChange }: SortByInputProps) => {
 	);
 };
 
+
 export default SortByInput;
