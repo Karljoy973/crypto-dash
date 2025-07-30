@@ -12,12 +12,22 @@ const SortByInput = ({ sortBy, onSortByChange }: SortByInputProps) => {
         { key: "current_price_desc", value: "Current Price (High -> Low)" },
         
     ]
-    return (<div className="controls">
-        <label htmlFor="sort-by">Sort by: </label>
-        <select name="sort-by-gecko" id="sort-by-gecko" value={sortBy} onChange={e => onSortByChange(e.target.value)}>
-            {geckoOrder.map(order => (<option key={order.key}>{order.value}</option>))}
-        </select>
-    </div>);
+    return (
+		<div className="controls">
+			<label htmlFor="sort-by">Sort by: </label>
+			<select
+				name="sort-by-gecko"
+				id="sort-by-gecko"
+				value={sortBy}
+				onChange={(e) => onSortByChange(e.target.value)}>
+				{geckoOrder.map((order) => (
+					<option key={order.key} value={order.key}>
+						{order.value}
+					</option>
+				))}
+			</select>
+		</div>
+	);
 }
 
 
